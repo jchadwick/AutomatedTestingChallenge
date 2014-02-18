@@ -8,7 +8,7 @@
 
     protected override void OnLoad(EventArgs args)
     {
-        var directory = new DirectoryInfo(@"C:\Users\zkvdpl4\code\AutomatedTestingChallenge\Data Files\");
+        var directory = new DirectoryInfo(@"C:\Temp\Data Files\");
         var clientFileInfos = directory.GetFiles();
 
         var db = new ClientDataContext();

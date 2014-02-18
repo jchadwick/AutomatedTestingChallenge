@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
@@ -13,6 +16,7 @@ namespace DemoWebApp.UnitTests
     {
         private DemoWebAppPage demoPage;
         private IWebDriver driver;
+        private IEnumerable<Model2.Client> _clients;
 
         [BeforeScenario()]
         public void Setup()
@@ -26,11 +30,10 @@ namespace DemoWebApp.UnitTests
             driver.Quit();
         }
 
-        [Given(@"That I have two clients defined")]
-        public void GivenThatIHaveTwoClientsDefined()
+        [Given(@"There are clients defined as")]
+        public void GivenThatIHaveClientsDefined(Table table)
         {
-            Model2.Client client1 = new Model2.Client();
-            Model2.Client client2 = new Model2.Client();
+            _clients = table.CreateSet<Model2.Client>();
         }
             
         [When(@"I load the page")]
@@ -39,15 +42,20 @@ namespace DemoWebApp.UnitTests
             demoPage = DemoWebAppPage.NavigateTo(driver);
         }
 
-        [Then(@"two clients should have names, addresses, and accounts")]
-        public void ThenTwoClientsShouldBeDisplayedOnTheScreen()
+        [Then(@"all clients should be displayed with their name, address, and account summaries")]
+        public void ThenClientsShouldBeDisplayedOnTheScreen()
         {
+            var expectedClientCount = _clients.Count();
             var results = driver.FindElements(By.ClassName("col-md-4"));
-            Assert.IsTrue(results.Count == 2);
+            
+            Assert.IsTrue(results.Count == expectedClientCount);
+            
             Assert.IsTrue(results[0].FindElement(By.TagName("h2")).Text == "Client #1");
             Assert.IsTrue(results[1].FindElement(By.TagName("h2")).Text == "Client #2");
+            
             Assert.IsTrue(results[0].FindElements(By.TagName("p"))[1].FindElement(By.TagName("span")).Text == "123 Test St., Testington, NJ 08615");
             Assert.IsTrue(results[1].FindElements(By.TagName("p"))[1].FindElement(By.TagName("span")).Text == "453 Test St., Testington, NJ 08615");
+            
             Assert.IsTrue(results[0].FindElement(By.TagName("ul")).FindElements(By.TagName("li")).Count == 2);
             Assert.IsTrue(results[1].FindElement(By.TagName("ul")).FindElements(By.TagName("li")).Count == 2);
         }

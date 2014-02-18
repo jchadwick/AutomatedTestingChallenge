@@ -69,21 +69,34 @@ namespace DemoWebApp.UnitTests.SpecFlow.Features.ClientDisplay
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Display two clients")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Display client information")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "Client Data Displayed")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
-        public virtual void DisplayTwoClients()
+        public virtual void DisplayClientInformation()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display two clients", new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Display client information", new string[] {
                         "mytag"});
 #line 4
 this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Address",
+                        "NumAccounts"});
+            table1.AddRow(new string[] {
+                        "Client #1",
+                        "123 Test St., Testington, NJ 08615",
+                        "2"});
+            table1.AddRow(new string[] {
+                        "Client #2",
+                        "453 Test St., Testington, NJ 08615",
+                        "2"});
 #line 5
- testRunner.Given("That I have two clients defined", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 6
+ testRunner.Given("There are clients defined as", ((string)(null)), table1, "Given ");
+#line 9
  testRunner.When("I load the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 7
- testRunner.Then("two clients should have names, addresses, and accounts", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+ testRunner.Then("all clients should be displayed with their name, address, and account summaries", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
