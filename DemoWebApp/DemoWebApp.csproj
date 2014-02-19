@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\ClientDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
