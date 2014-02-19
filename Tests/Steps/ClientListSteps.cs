@@ -46,5 +46,18 @@ namespace Tests.Steps
         {
             Assert.Equal(_clientCount, _clientListPage.ClientCount);
         }
+
+        [Then(@"they should contain the following data:")]
+        public void ThenTheyShouldContainTheFollowingData(Table table)
+        {
+            var clients = _clientListPage.ClientSummaries;
+
+            foreach (var row in table.Rows)
+            {
+                Assert.Contains(row["Name"], clients.Select(x => x.Name));
+                Assert.Contains(row["Address"], clients.Select(x => x.Address));
+            }
+        }
+
     }
 }

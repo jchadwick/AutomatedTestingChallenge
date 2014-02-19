@@ -115,7 +115,7 @@
             <div class="col-md-4">
                 <h2><%= client.Name %></h2>
                 <p><span class="text-muted">(Client for <%= TimeSinceNow(client.CreatedOn) %>)</span></p>
-                <p><label>Address</label> <br/> <span><%= client.Address %></span> </p>
+                <p><label>Address</label> <br/> <span class="address"><%= client.Address %></span> </p>
                 <p><label>Accounts</label> (<%=client.Accounts.Count %>)
                     <ul>
                     <% foreach(var account in client.Accounts) { %>

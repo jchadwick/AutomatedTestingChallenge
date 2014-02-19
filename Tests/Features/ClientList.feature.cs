@@ -89,6 +89,18 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.Then("I should see summaries for all of the clients defined in the system", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Address"});
+            table1.AddRow(new string[] {
+                        "Client #1",
+                        "123 Test St., Testington, NJ 08615"});
+            table1.AddRow(new string[] {
+                        "Client #2",
+                        "453 Test St., Testington, NJ 08615"});
+#line 10
+ testRunner.And("they should contain the following data:", ((string)(null)), table1, "And ");
+#line hidden
             this.ScenarioCleanup();
         }
         
